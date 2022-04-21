@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import {Navbar} from "./components/navbar";
+import {Button} from "./components/button"
+import {Display} from "./components/display"
+import {AuthContext} from './components/contexts/authcontext';
+import {useContext} from "react"
 
 function App() {
+  const {isAuth,toggleAuth} = useContext(AuthContext)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar width={"98%"} height={"40px"} border={"1px solid"}>
+        <Button
+        onClick={()=>{
+          toggleAuth()
+        }}
+        color={"white"}
+        bgcolor={"rgb(36,144,254)"}
+        border={"0px"}
+        >{isAuth === false ? "Login" : "Logout"}
+        </Button>
+      </Navbar>
+      {isAuth === false ? "": <Display/>}
     </div>
   );
 }
